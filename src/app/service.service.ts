@@ -5,10 +5,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ServiceService {
+  baseUrl = 'http://localhost:3000/tableData';
 
-  constructor(private http : HttpClient) { }
-
-  getJsonData(){
-    return this.http.get('http://localhost:3000/tableData');
+  constructor(private http: HttpClient) { }
+  getJsonData() {
+    return this.http.get(this.baseUrl);
   }
 }

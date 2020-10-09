@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service.service';
-import { ModuleRegistry } from '@ag-grid-community/core';     // @ag-grid-community/core will always be implicitly available
+import { ModuleRegistry } from '@ag-grid-community/core';
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
 import { CsvExportModule } from "@ag-grid-community/csv-export";
 import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
-// import {MasterDetailModule} from "@ag-grid-enterprise/master-detail";
+;
 ModuleRegistry.registerModules([
   ClientSideRowModelModule,
   CsvExportModule,
   ExcelExportModule,
-  // MasterDetailModule
 ]);
 @Component({
   selector: 'app-table',
@@ -61,22 +60,18 @@ export class TableComponent implements OnInit {
     )
     return columnDefinitions;
   }
+
   getJsonData() {
     this.service.getJsonData().subscribe(res => {
       this.tablerowData = res;
     })
   }
-  search(e) {
-    console.log(e);
-    this.data = e;
-  }
+
   serchRage(e) {
     this.selectedItem = e;
     this.splitedValue = this.selectedItem.split('-');
-    console.log(this.splitedValue);
     this.rangeFirstValue = this.splitedValue[0];
     this.rangeSecondValue = this.splitedValue[1];
-    console.log(this.rangeSecondValue, "this.rangeSecondValue");
   }
 
   onBtnExportDataAsExcel() {
@@ -88,8 +83,8 @@ export class TableComponent implements OnInit {
     this.gridColumnApi = params.columnApi;
     this.service.getJsonData().subscribe((data) => {
       this.tablerowData = data;
-      this.columnDefs = this.generateColumns(this.tablerowData)
-      params.api.setRowData(data)
+      this.columnDefs = this.generateColumns(this.tablerowData);
+      params.api.setRowData(data);
     });
   }
 
@@ -106,15 +101,14 @@ export class TableComponent implements OnInit {
         let obj = {};
         let currentline = lines[i].split(',');
         for (let j = 0; j < headers.length; j++) {
-          let dataString = String(currentline[j])
+          let dataString = String(currentline[j]);
           console.log(dataString.toString());
           obj[headers[j]] = currentline[j];
         }
         result.push(obj);
       }
-      console.log(result);
       this.tablerowData = result;
-      this.columnDefs = this.generateColumns(this.tablerowData)
+      this.columnDefs = this.generateColumns(this.tablerowData);
     }
   }
 
